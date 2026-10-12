@@ -20,8 +20,9 @@ function doPost(e) {
   } catch (err) {
     return resposta({ ok: false, erro: 'pedido inválido' });
   }
-  if (CODIGO === 'troque-este-codigo') return resposta({ ok: false, erro: 'Troque o CODIGO no Apps Script antes de usar.' });
-  if (req.codigo !== CODIGO) return resposta({ ok: false, erro: 'código da equipe errado' });
+  if (String(CODIGO).trim() === 'troque-este-codigo') return resposta({ ok: false, erro: 'Troque o CODIGO no Apps Script antes de usar.' });
+  // compara como texto (funciona com ou sem aspas no CODIGO, ex.: 11310204 ou '11310204')
+  if (String(req.codigo == null ? '' : req.codigo).trim() !== String(CODIGO).trim()) return resposta({ ok: false, erro: 'código da equipe errado' });
   const lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
