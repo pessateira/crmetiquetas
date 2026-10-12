@@ -11,7 +11,7 @@ const CODIGO = 'troque-este-codigo';
 const ABA_FUNIL = 'funil';
 const ABA_NOTAS = 'anotacoes';
 const COLS_FUNIL = ['pessoa', 'id da conversa', 'nome', 'telefone', 'etapa', 'última mensagem', 'atualizado em', 'dados'];
-const COLS_NOTAS = ['pessoa', 'id da conversa', 'nome', 'valor estimado/mês', 'produto', 'nível', 'origem', 'próximo passo', 'data', 'anotações', 'alterado por', 'alterado em', 'ficha'];
+const COLS_NOTAS = ['pessoa', 'id da conversa', 'nome', 'valor estimado/ano', 'produto', 'nível', 'origem', 'próximo passo', 'data', 'anotações', 'alterado por', 'alterado em', 'ficha'];
 
 function doPost(e) {
   let req = {};
@@ -97,7 +97,8 @@ function anotar(req) {
     dono,
     id,
     String(req.nome || ''),
-    f.value == null || f.value === '' ? '' : Number(f.value),
+    // valor por ano (fichas antigas, sem valorPeriodo, guardavam por mês)
+    f.value == null || f.value === '' ? '' : Number(f.value) * (f.valorPeriodo === 'ano' ? 1 : 12),
     String(f.produto || ''),
     String(f.nivel || ''),
     String(f.origem || ''),
