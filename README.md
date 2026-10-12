@@ -1,4 +1,4 @@
-# CRM Etiquetas
+# Coyote CRM (CRM Etiquetas)
 
 Extensão do Chrome que mostra um funil (Kanban) dentro do WhatsApp Web, espelhando as etiquetas do WhatsApp Business.
 
