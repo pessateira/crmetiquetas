@@ -11,7 +11,7 @@ const CODIGO = 'troque-este-codigo';
 const ABA_FUNIL = 'funil';
 const ABA_NOTAS = 'anotacoes';
 const COLS_FUNIL = ['pessoa', 'id da conversa', 'nome', 'telefone', 'etapa', 'última mensagem', 'atualizado em', 'dados'];
-const COLS_NOTAS = ['pessoa', 'id da conversa', 'nome', 'valor estimado/ano', 'produto', 'nível', 'origem', 'próximo passo', 'data', 'anotações', 'alterado por', 'alterado em', 'ficha'];
+const COLS_NOTAS = ['pessoa', 'id da conversa', 'nome', 'valor estimado/ano', 'produto', 'nível', 'origem', 'próximo passo', 'data', 'anotações', 'alterado por', 'alterado em', 'ficha', 'motivo da perda'];
 
 function doPost(e) {
   let req = {};
@@ -109,6 +109,7 @@ function anotar(req) {
     String(req.pessoa || ''),
     new Date().toISOString(),
     JSON.stringify(f),
+    String(f.motivoPerda || ''),
   ];
   const i = corpo.findIndex((l) => l[0] === dono && String(l[1]) === id);
   if (i >= 0) corpo[i] = linha;
